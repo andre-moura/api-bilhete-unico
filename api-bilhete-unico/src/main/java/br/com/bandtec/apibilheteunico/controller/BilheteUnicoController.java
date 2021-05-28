@@ -36,7 +36,7 @@ public class BilheteUnicoController {
     @GetMapping("/{id}")
     public ResponseEntity getBilheteUnico(@PathVariable Integer id) {
         if (bilheteRepository.existsById(id)){
-            return ResponseEntity.status(200).body(bilheteRepository.getById(id));
+            return ResponseEntity.status(200).body(bilheteRepository.findById(id).get());
         } else {
             return ResponseEntity.status(204).build();
         }
@@ -84,7 +84,7 @@ public class BilheteUnicoController {
                     return ResponseEntity
                             .status(400)
                             .body("Saldo atual R$"+bilheteUnico.get().getSaldo()+
-                                    " insuficiente para esta passagem" );
+                                    " insuficiente para esta passagem");
                 }
             } else {
                 return ResponseEntity.status(400).body("Tipo de passagem não encontrada" );

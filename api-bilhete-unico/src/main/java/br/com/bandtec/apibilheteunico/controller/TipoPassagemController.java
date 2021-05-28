@@ -13,18 +13,18 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/tipo-passagem")
-public class PassagemController {
+public class TipoPassagemController {
 
     @Autowired
     private TipoPassagemRepository tipoPassagemRepository;
 
 
     @PostMapping
-    public ResponseEntity postPassagem(@RequestBody TipoPassagem novaTipoPassagem){
+    public ResponseEntity postPassagem(@RequestBody TipoPassagem novoTipoPassagem){
         Optional<TipoPassagem> passagem = Optional.ofNullable
-                (tipoPassagemRepository.findPassagemByDescricao(novaTipoPassagem.getDescricao()));
+                (tipoPassagemRepository.findPassagemByDescricao(novoTipoPassagem.getDescricao()));
         if (!passagem.isPresent()){
-            tipoPassagemRepository.save(novaTipoPassagem);
+            tipoPassagemRepository.save(novoTipoPassagem);
             return ResponseEntity.status(201).build();
         } else {
             return ResponseEntity.status(400).body("Este tipo de passagem já está cadastrado!");
