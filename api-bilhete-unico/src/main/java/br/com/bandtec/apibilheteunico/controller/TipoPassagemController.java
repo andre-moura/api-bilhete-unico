@@ -19,6 +19,7 @@ public class TipoPassagemController {
     private TipoPassagemRepository tipoPassagemRepository;
 
 
+    // Cadastra um novo tipo de passagem
     @PostMapping
     public ResponseEntity postPassagem(@RequestBody TipoPassagem novoTipoPassagem){
         Optional<TipoPassagem> passagem = Optional.ofNullable

@@ -20,6 +20,7 @@ public class BilheteUnicoController {
     @Autowired
     private TipoPassagemRepository passagemRepository;
 
+    // Cadastra um bilhete unico quando não há bilhetes cadastrados com o mesmo cpf
     @PostMapping
     public ResponseEntity postBilheteUnico(@RequestBody BilheteUnico novoBilheteUnico) {
         Optional<BilheteUnico> bilheteUnico = Optional.ofNullable
@@ -33,6 +34,7 @@ public class BilheteUnicoController {
     }
 
 
+    // Pega o bilhete único pelo seu id
     @GetMapping("/{id}")
     public ResponseEntity getBilheteUnico(@PathVariable Integer id) {
         if (bilheteRepository.existsById(id)){
@@ -42,6 +44,7 @@ public class BilheteUnicoController {
         }
     }
 
+    // Reccarega o bilhete unico usando seu id e o valor da recarga
     @PostMapping("/{id}/recarga/{valorRecarga}")
     public ResponseEntity recarregarbilhete(@PathVariable Integer id,
                                             @PathVariable Double valorRecarga){
@@ -67,6 +70,7 @@ public class BilheteUnicoController {
         }
     }
 
+    // Passa o bilhete unico usando o id do bilhete e o id da passagem, assim debitando de seu saldo
     @PostMapping("/{id}/passagem/{idTipo}")
     public ResponseEntity passarBilheteUnico(@PathVariable Integer id, @PathVariable Integer idTipo){
         Optional<BilheteUnico> bilheteUnico = bilheteRepository.findById(id);
